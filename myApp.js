@@ -48,7 +48,7 @@ const firstLastName = (req, res) => {
   });
 };
 
-app.route('name').get(firstLastName(req, res)).post(firstLastName(req, res));
+app.get('/name', firstLastName(req, res)).post('/name', firstLastName(req, res));
 
 console.log('Hello World');
 

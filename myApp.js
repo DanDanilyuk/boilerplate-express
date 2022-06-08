@@ -40,6 +40,16 @@ app.get("/:word/echo", (req,  res) => {
   });
 })
 
+const firstLastName = (req, res) => {
+  const first = req.query.first;
+  const last = req.query.last;
+  res.send({
+    name: `${first} ${last}`
+  });
+};
+
+app.route('name').get(firstLastName(req, res)).post(firstLastName(req, res));
+
 console.log('Hello World');
 
 module.exports = app;

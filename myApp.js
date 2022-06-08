@@ -14,7 +14,7 @@ const middleware = (req, res, next) => {
   next();
 };
 
-const nameMiddleware = () => {
+const nameMiddleware = (req, res, next) => {
   const first = req.query.first;
   const firstBody = req.body.first;
   const last = req.query.last;

@@ -11,6 +11,12 @@ const middleware = (req, res, next) => {
   next();
 };
 
+const nameMiddleware = () => {
+  const first = req.query.first;
+  const last = req.query.last;
+  req.name = { first: first, last: last }
+}
+
 app.get("/", (req, res) => {
   // res.send("Hello Express");
   res.sendFile(__dirname + "/public/index.html");
@@ -40,15 +46,11 @@ app.get("/:word/echo", (req,  res) => {
   });
 })
 
-const firstLastName = (req, res) => {
-  const first = req.query.first;
-  const last = req.query.last;
-  res.send({
-    name: `${first} ${last}`
-  });
-};
-
-app.get('/name', firstLastName(req, res)).post('/name', firstLastName(req, res));
+app.get('/name', nameMiddleware, (req, res) => {
+  res.json({
+    name: `${req.name.first} ${req.name.last}`
+  })
+})
 
 console.log('Hello World');
 

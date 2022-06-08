@@ -1,10 +1,13 @@
 let express = require('express');
+let bodyParser = require('body-parser');
 let app = express();
 
 app.use(function middleware(req, _res, next) {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const middleware = (req, res, next) => {
   req.time = new Date().toString();

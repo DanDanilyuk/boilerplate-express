@@ -33,6 +33,13 @@ app.get("/now", middleware, (req, res) => {
   });
 });
 
+app.get("/:word/echo", (req,  res) => {
+  const word = req.params.word;
+  res.send({
+    echo: word
+  });
+})
+
 console.log('Hello World');
 
 module.exports = app;

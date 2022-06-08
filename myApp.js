@@ -16,8 +16,11 @@ const middleware = (req, res, next) => {
 
 const nameMiddleware = () => {
   const first = req.query.first;
+  const firstBody = req.body.first;
   const last = req.query.last;
-  req.name = { first: first, last: last }
+  const lastBody = req.body.last;
+  req.name = { first: first, last: last };
+  req.bodyName = { first: firstBody, last: lastBody };
 }
 
 app.get("/", (req, res) => {
@@ -52,6 +55,12 @@ app.get("/:word/echo", (req,  res) => {
 app.get('/name', nameMiddleware, (req, res) => {
   res.json({
     name: `${req.name.first} ${req.name.last}`
+  })
+})
+
+app.post('/name', nameMiddleware, (req, res) => {
+  res.json({
+    name: `${req.bodyName.first} ${req.bodyName.last}`
   })
 })
 
